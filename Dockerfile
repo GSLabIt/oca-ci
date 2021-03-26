@@ -60,7 +60,11 @@ RUN apt-get update -qq \
        libldap2-dev \
        libsasl2-dev \
        # need libjpeg to build older pillow versions
-       libjpeg-dev
+       libjpeg-dev \
+       # gslabit: need openssh-client for ssh-agent action
+       openssh-client \
+       # gslabit: need libmagickwand-dev for specific adddon
+       libmagickwand-dev
 
 # We don't use the ubuntu virtualenv package because it unbundles pip dependencies
 # in virtualenvs it create.
