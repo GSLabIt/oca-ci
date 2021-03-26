@@ -79,13 +79,19 @@ jobs:
             odoo_org_repo: "oca/ocb"
             image_name: py3.8-ocb14.0
     steps:
+      - name: Change String Case
+        id: to_lower
+        uses: ASzc/change-string-case-action@v2
+        with:
+          string: ${{ github.repository_owner }}
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Login to ghcr.io
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
-          username: ${{ github.actor }}
+          username: ${{ steps.to_lower.outputs.lowercase }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push
         id: docker_build
@@ -96,11 +102,11 @@ jobs:
             odoo_version=${{ matrix.odoo_version }}
             odoo_org_repo=${{ matrix.odoo_org_repo }}
           tags: |
-            ghcr.io/${{ github.actor }}/oca-ci/${{ matrix.image_name }}:latest
+            ghcr.io/${{ steps.to_lower.outputs.lowercase }}/oca-ci/${{ matrix.image_name }}:latest
           labels: |
             org.opencontainers.image.source=${{ github.event.repository.html_url }}
           push: true
-          cache-from: type=registry,ref=ghcr.io/${{ github.actor }}/oca-ci/${{ matrix.image_name }}:latest
+          cache-from: type=registry,ref=ghcr.io/${{ steps.to_lower.outputs.lowercase }}/oca-ci/${{ matrix.image_name }}:latest
           cache-to: type=inline
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
