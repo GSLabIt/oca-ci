@@ -26,3 +26,4 @@
 27|git@github.com:ooops404/ooops-shiki
 28|git@github.com:ooops404/ooops-sdscolor
 29|git@github.com:ooops404/ooops-rental
+30|git@github.com:ooops404/ooops-hr
