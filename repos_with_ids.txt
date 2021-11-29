@@ -30,3 +30,4 @@
 31|git@github.com:ooops404/ooops-helpdesk
 32|git@github.com:ooops404/ooops-operating-unit
 33|git@github.com:ooops404/ooops-apulia
+34|git@github.com:ooops404/ooops-pos
